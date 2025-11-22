@@ -239,6 +239,33 @@ void test_split_NullInput(void) {
 }
 
 /* ==========================================================
+ *                  strlib_NumToStr()
+ * ========================================================== */
+void test_NumToStr_Normal(void) {
+    char *res = strlib_NumToStr(12345);
+    TEST_ASSERT_NOT_NULL(res);
+    TEST_ASSERT_EQUAL_STRING("12345", res);
+    free(res);
+}
+
+void test_NumToStr_Zero(void) {
+    char *res = strlib_NumToStr(0);
+    TEST_ASSERT_NOT_NULL(res);
+    TEST_ASSERT_EQUAL_STRING("0", res);
+    free(res);
+}
+
+void test_NumToStr_MaxSize(void) {
+    char expected[50];
+    snprintf(expected, sizeof(expected), "%zu", SIZE_MAX);
+
+    char *res = strlib_NumToStr(SIZE_MAX);
+    TEST_ASSERT_NOT_NULL(res);
+    TEST_ASSERT_EQUAL_STRING(expected, res);
+    free(res);
+}
+
+/* ==========================================================
  *                      main()
  * ========================================================== */
 int main(void)
@@ -292,6 +319,10 @@ int main(void)
     RUN_TEST(test_split_Basic);
     RUN_TEST(test_split_EmptyString);
     RUN_TEST(test_split_NullInput);
+
+    RUN_TEST(test_NumToStr_Normal);
+    RUN_TEST(test_NumToStr_Zero);
+    RUN_TEST(test_NumToStr_MaxSize);
 
     return UNITY_END();
 }

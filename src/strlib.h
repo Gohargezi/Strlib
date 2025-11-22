@@ -88,4 +88,10 @@ char* strlib_to_upper(const char* src);
  */
 char** strlib_split(const char* src, char delim, size_t* count);
 
+/**
+ * @brief Converts a number to a new allocated string.
+ * @return Newly allocated string, or NULL on error.
+ */
+char* strlib_NumToStr (size_t number) ;
+
 #endif /* STRLIB_H */

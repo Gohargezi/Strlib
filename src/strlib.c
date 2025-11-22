@@ -241,5 +241,17 @@ char** strlib_split(const char* src, char delim, size_t* count)
     return tokens ;
 }
 
-
-
+char* strlib_NumToStr (size_t number)
+{
+    size_t len = 1 ;
+    for ( size_t i = 1  ; i*10 < number && i* 10 > i ; i *= 10 ) {len ++ ;}
+    char* str = malloc((len +1 )* sizeof(char)) ;
+    if (str == NULL) return NULL ;
+    str[len] = '\0' ;
+    for (size_t i = len-1; i != SIZE_MAX  ; i--)
+    {
+        str[i] = '0' + number % 10 ;
+        number /= 10 ;
+    }
+    return str ;
+}
